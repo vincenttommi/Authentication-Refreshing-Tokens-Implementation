@@ -47,7 +47,7 @@ SIMPLE_JWT = {
     # A datetime.timedelta object which specifies how long access tokens are valid.
     "REFRESH_TOKEN_LIFETIME": timedelta(days=90),
     #  datetime.timedelta object which specifies how long refresh tokens are valid.
-    "ROTATE_REFRESH_TOKENS": False,
+    "ROTATE_REFRESH_TOKENS": True,
     # When set to True, if a refresh token is submitted to the TokenRefreshView, a new refresh token will be returned along with the new access token
     "BLACKLIST_AFTER_ROTATION": False,
     # When set to True, causes refresh tokens submitted to the TokenRefreshView to be added to the blacklist if the blacklist app is in use and the ROTATE_REFRESH_TOKENS setting is set to True
