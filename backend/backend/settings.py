@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +38,66 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
   
+}
+
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    # A datetime.timedelta object which specifies how long access tokens are valid.
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=90),
+    #  datetime.timedelta object which specifies how long refresh tokens are valid.
+    "ROTATE_REFRESH_TOKENS": False,
+    # When set to True, if a refresh token is submitted to the TokenRefreshView, a new refresh token will be returned along with the new access token
+    "BLACKLIST_AFTER_ROTATION": False,
+    # When set to True, causes refresh tokens submitted to the TokenRefreshView to be added to the blacklist if the blacklist app is in use and the ROTATE_REFRESH_TOKENS setting is set to True
+    "UPDATE_LAST_LOGIN": False,
+    #Updating last_login will dramatically increase the number of database transactions
+    "ALGORITHM": "HS256",
+    #The algorithm from the PyJWT library which will be used to perform signing/verification operations on tokens. 
+    "VERIFYING_KEY": "",
+    # The verifying key which is used to verify the content of generated tokens. 
+    "AUDIENCE": None,
+    # The audience claim to be included in generated tokens and/or validated in decoded tokens.
+    "ISSUER": None,
+    #The issuer claim to be included in generated tokens and/or validated in decoded tokens
+    "JSON_ENCODER": None,
+    "JWK_URL": None,
+    # The JWK_URL is used to dynamically resolve the public keys needed to verify the signing of tokens 
+    "LEEWAY": 0,
+    # Leeway is used to give some margin to the expiration time. This can be an integer for seconds or a datetime.timedelta
+
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    # The authorization header type(s) that will be accepted for views that require authentication. 
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    # The authorization header name to be used for authentication. 
+    "USER_ID_FIELD": "id",
+    # The database field from the user model that will be included in generated tokens to identify users
+    "USER_ID_CLAIM": "user_id",
+    # The claim in generated tokens which will be used to store user identifiers
+    "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",
+    #Callable to determine if the user is permitted to authenticate. 
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    #A list of dot paths to classes that specify the types of token that are allowed to prove authentication
+    "TOKEN_TYPE_CLAIM": "token_type",
+    # The claim name that is used to store a token’s type
+    "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
+
+    "JTI_CLAIM": "jti",
+    # The claim name that is used to store a token’s unique identifier
+
+    "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
+    # The claim name that is used to store the expiration time of a sliding token’s refresh period.
+    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
+    # 
+    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
+
+    "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
+    "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
+    "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
+    "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
+    "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
+    "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
 
